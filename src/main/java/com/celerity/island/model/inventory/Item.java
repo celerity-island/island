@@ -29,6 +29,7 @@ public class Item {
         this.quantity = quantity;
     }
 
+    // TODO: add check for negative inventory quantity
     public void consume(int value) {
         quantity -= value;
     }

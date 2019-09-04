@@ -41,7 +41,7 @@ public enum House {
         return requiredMaterials;
     }
 
-    public void setRequiredMaterials(Map<MaterialType, Integer> requiredMaterials) {
+    private void setRequiredMaterials(Map<MaterialType, Integer> requiredMaterials) {
         this.requiredMaterials = requiredMaterials;
     }
 }
