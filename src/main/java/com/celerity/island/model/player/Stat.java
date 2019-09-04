@@ -1,9 +1,11 @@
 package com.celerity.island.model.player;
 
-public enum Stat {
+import lombok.Getter;
 
+public enum Stat {
     HEALTH, HUNGER, THIRST, ENERGY, HAPPINESS, SANITY;
 
+    @Getter
     private int level;
 
     public void setLevel(int level) {

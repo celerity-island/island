@@ -1,6 +1,7 @@
 package com.celerity.island.service;
 
-import com.celerity.island.model.inventory.House;
+import com.celerity.island.model.exception.NotEnoughMaterialException;
+import com.celerity.island.model.home.House;
 import com.celerity.island.model.material.Material;
 import com.celerity.island.model.material.MaterialType;
 import com.celerity.island.util.InventoryUtils;
@@ -14,7 +15,7 @@ public class BuildHouseService {
 
     private InventoryService inventoryService = new InventoryService(); // TODO Autowire
 
-    public House upgradeHouse(House house, List<Material> materials) {
+    public House upgradeHouse(House house, List<Material> materials) throws NotEnoughMaterialException {
         int houseLevel = 0;
         if (house != null) {
             houseLevel = house.ordinal() + 1;
@@ -22,13 +23,13 @@ public class BuildHouseService {
         return buildHouse(houseLevel, materials);
     }
 
-    private House buildHouse(int houseLevel, List<Material> materials) {
+    private House buildHouse(int houseLevel, List<Material> materials) throws NotEnoughMaterialException {
         House house = House.values()[houseLevel];
         if (isEnoughMaterials(house.getRequiredMaterials(), InventoryUtils.getMaterialsView(materials))) {
             inventoryService.consumeMaterials(materials, house.getRequiredMaterials());
             return house;
         } else {
-            throw new IllegalArgumentException(); // TODO Not enough materials exception
+            throw new NotEnoughMaterialException();
         }
     }
 

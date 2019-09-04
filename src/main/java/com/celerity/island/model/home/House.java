@@ -1,10 +1,14 @@
-package com.celerity.island.model.inventory;
+package com.celerity.island.model.home;
 
 import com.celerity.island.model.material.MaterialType;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
+@RequiredArgsConstructor
 public enum House {
 
     SIMPLE_TENT("Simple tent"), TENT("tent"), FORTIFIED_TENT("Fortified tent");
@@ -26,20 +30,8 @@ public enum House {
         FORTIFIED_TENT.setRequiredMaterials(requiredMaterialsForFortifiedTent);
     }
 
-    House(String name) {
-        this.name = name;
-    }
-
-    private String name;
+    private final String name;
     private Map<MaterialType, Integer> requiredMaterials;
-
-    public String getName() {
-        return name;
-    }
-
-    public Map<MaterialType, Integer> getRequiredMaterials() {
-        return requiredMaterials;
-    }
 
     private void setRequiredMaterials(Map<MaterialType, Integer> requiredMaterials) {
         this.requiredMaterials = requiredMaterials;

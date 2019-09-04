@@ -1,6 +1,7 @@
 package com.celerity.island;
 
-import com.celerity.island.model.inventory.House;
+import com.celerity.island.model.exception.NotEnoughMaterialException;
+import com.celerity.island.model.home.House;
 import com.celerity.island.model.inventory.Inventory;
 import com.celerity.island.model.inventory.Item;
 import com.celerity.island.model.material.Material;
@@ -51,8 +52,13 @@ public class Demo {
 
     private static void buildHouse() {
         Inventory inventory = player.getInventory();
-        House house = buildHouseService.upgradeHouse(inventory.getHouse(), getMaterials(inventory));
-        inventory.setHouse(house);
+        try {
+            House house = buildHouseService.upgradeHouse(player.getHouse(), getMaterials(inventory));
+            player.setHouse(house);
+            System.out.println("House is successfully built");
+        } catch (NotEnoughMaterialException e) {
+            System.out.println("Not enough materials");
+        }
         main(null);
     }
 
@@ -79,7 +85,7 @@ public class Demo {
 
     private static void showInventory() {
         Inventory inventory = player.getInventory();
-        printHouse(inventory.getHouse());
+        printHouse(player.getHouse());
         printItems(inventory.getItems());
         main(null);
     }
