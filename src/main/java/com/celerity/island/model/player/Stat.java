@@ -14,7 +14,7 @@ public enum Stat {
         }
     }
 
-    public void changeLevel(int addition) {
-        setLevel(level + addition);
+    public void changeLevel(int change) {
+        setLevel(level + change);
     }
 }
