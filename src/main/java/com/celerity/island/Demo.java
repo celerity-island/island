@@ -76,7 +76,7 @@ public class Demo {
         Material material = gatherMaterialService.gatherMaterial(MaterialType.values()[type]);
         for (Item item : inventory.getItems()) {
             if (((Material) item).getMaterialType().equals(material.getMaterialType())) {
-                item.setQuantity(item.getQuantity() + material.getQuantity());
+                item.setQuantity(item.getQuantity().getValue() + material.getQuantity().getValue());
                 return;
             }
         }

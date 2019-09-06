@@ -1,5 +1,7 @@
 package com.celerity.island.model.inventory;
 
+import com.celerity.island.model.number.PositiveInteger;
+import com.celerity.island.model.number.exception.LessThanZeroValueException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,17 +9,24 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public abstract class Item {
 
     private String name;
-    private int quantity;
+    private PositiveInteger quantity;
 
-    // TODO: add check for negative inventory quantity
     public void consume(int value) {
-        quantity -= value;
+        try {
+            quantity.decrease(value);
+        } catch (LessThanZeroValueException e) {
+            // TODO throw ZeroQuantityException/NotEnoughMaterialException, process it in appropriate service/manager
+        }
     }
 
     public void add(int value) {
-        quantity += value;
+        quantity.increase(value);
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = new PositiveInteger(quantity);
     }
 }
