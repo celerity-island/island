@@ -31,6 +31,6 @@ public class InventoryUtils {
 
     public static Map<MaterialType, Integer> getMaterialsView(@NotNull List<? extends Item> items) {
         return getMaterials(items).stream()
-                .collect(toMap(Material::getMaterialType, Item::getQuantity));
+                .collect(toMap(Material::getMaterialType, item -> item.getQuantity().getValue()));
     }
 }
